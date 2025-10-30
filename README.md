@@ -1,11 +1,38 @@
-# Hi there, I'm Angga!  👋
+# sv
 
-- 🔭 I’m Currently working as a Backend Developer, actively contributing to the migration from ColdFusion to Go-Lang and helping modernize software architectures for both SaaS and On-Premises solutions.
-- 🔭 I’ve spent the past 3+ years building React-based web apps that are fast, clean, and user-friendly.
-- 🌱 I’m currently learning GO, electron, C#, .Net, and WPF
-- 👯 I’m looking to collaborate on open-source projects, especially those built with JavaScript, React, Svelte, Electron, or Go.
+Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
-- 📫 How to reach me: I'm available on [Linked In](https://linkedin.com/in/anggarobo/), [Github](https://github.com/anggarobo/), [DevTo](https://dev.to/angga), and [X](https://x.com/_dikacangin) — feel free to drop a message.
-- 😄 Pronouns: he/him.
-- ⚡ Fun fact: An Amateur footballer who actively plays fun football
+## Creating a project
 
+If you're seeing this, you've probably already done this step. Congrats!
+
+```sh
+# create a new project in the current directory
+npx sv create
+
+# create a new project in my-app
+npx sv create my-app
+```
+
+## Developing
+
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
+```sh
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
+
+## Building
+
+To create a production version of your app:
+
+```sh
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.

@@ -1,0 +1,86 @@
+/* -----------------------------------------------------------
+   app.css — TailwindCSS v4.1 + SvelteKit
+----------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=DM+Serif+Display:ital@0;1&family=Gloock&family=Racing+Sans+One&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+    --breakpoint-xxs: 180px;
+    --breakpoint-sm: 480px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 976px;
+    --breakpoint-xl: 1440px;
+    --breakpoint-xs: 240px;
+    --font-body: "Inter", "sans-serif";
+    --font-serif: "Gloock", "serif";
+    --font-dmserif: "DM Serif Display", "serif";
+    --font-racing: "Racing Sans One", "cursive";
+    --animate-paint: "paint 3s linear 1s infinite running";
+    --animate-paintRoller: "paintRoller 3s linear 1s infinite running";
+
+    @keyframes paint {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 100% 50%; }
+    }
+
+    @keyframes paintRoller {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(100%); }
+    }
+}
+
+:root {
+    --font-body: "Inter"
+}
+
+/* 🎨 Custom Base Styles */
+@layer base {
+  body {
+    @apply flex justify-center bg-white dark:bg-black text-black dark:text-white;
+    font-family: var(--font-body), sans-serif;
+  }
+
+  #__app {
+    @apply flex flex-col xl:w-[50vw] md:w-3/4 sm:w-10/12 xs:w-[95%];
+  }
+
+  .blur {
+    @apply blur-[10px];
+  }
+
+  /* Headings */
+  h1 { @apply text-6xl font-semibold; }
+  h2 { @apply text-5xl font-semibold; }
+  h3 { @apply text-4xl font-semibold; }
+  h4 { @apply text-3xl font-semibold; }
+  h5 { @apply text-2xl font-semibold; }
+  h6 { @apply text-xl font-semibold; }
+
+  /* list */
+  ul { @apply my-6 }
+  li { @apply mb-4 }
+
+  /* Links */
+  a { @apply text-blue-600 underline; }
+
+  section { @apply text-neutral-700 }
+
+  /* Resets */
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
