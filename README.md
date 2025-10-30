@@ -1,4 +1,4 @@
-## Hi there, I'm Angga!  👋
+# Hi there, I'm Angga!  👋
 
 - 🔭 I’m Currently working as a Backend Developer, actively contributing to the migration from ColdFusion to Go-Lang and helping modernize software architectures for both SaaS and On-Premises solutions.
 - 🔭 I’ve spent the past 3+ years building React-based web apps that are fast, clean, and user-friendly.
