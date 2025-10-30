@@ -58,13 +58,13 @@
   h6 { @apply text-xl font-semibold; }
 
   /* list */
-  ul { @apply my-6 }
+  ul { @apply my-6 space-y-3 }
   li { @apply mb-4 }
 
   /* Links */
   a { @apply text-blue-600 underline; }
 
-  section { @apply text-neutral-700 }
+  section { @apply text-gray-700 }
 
   /* Resets */
   html,

@@ -17,9 +17,9 @@
 		 <aside class='md:w-[150px] md:flex-shrink-0 md:mx-0 md:px-0 font-dmserif italic'>
 			<div class="lg:sticky lg:top-[9.5rem]">
 				<div class="ml-0 md:ml-[40px] mb-2 md:mb-8 space-y-10 flex flex-col md:flex-row items-start mt-0 md:mt-6">
-					<a data-sveltekit-preload-data="tap" href="/">
+					<a data-sveltekit-preload-data="tap" class="group" href="/">
 						<!-- Logo -->
-						 <img alt="angga" src={logo} />
+						 <img alt="angga" class="group-hover:opacity-75" src={logo} />
 					</a>
 				</div>
 
