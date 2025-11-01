@@ -19,23 +19,21 @@
 				<div class="ml-0 md:ml-[40px] mb-2 md:mb-8 space-y-10 flex flex-col md:flex-row items-start mt-0 md:mt-6">
 					<a data-sveltekit-preload-data="tap" class="group" href="/">
 						<!-- Logo -->
-						 <img alt="angga" class="group-hover:opacity-75" src={logo} />
+						 <img alt="angga" 
+						 class="opacity-85 group-hover:opacity-100 dark:opacity-20" src={logo} />
 					</a>
 				</div>
 
 				<nav class="flex flex-row md:flex-col items-start relative overflow-scroll md:px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative">
                     <div class="flex flex-row md:flex-col gap-4 md:gap-0 space-x-0 pr-10 mb-2 mt-2 md:mt-0 items-end">
-						<a class="transition-all text-gray-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 py-[5px] font-medium" data-sveltekit-preload-data="tap" href="/">
-						 	Home
+						<a class="transition-all text-gray-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 py-[5px] font-medium" data-sveltekit-preload-data="tap" href="/blog">
+							Blog
 						</a>
 						<a class="transition-all text-gray-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 py-[5px] font-medium" data-sveltekit-preload-data="tap" href="/experience">
 							Experience
 						</a>
-						<a class="transition-all text-gray-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 py-[5px] font-medium" data-sveltekit-preload-data="tap" href="/portfolio">
-							Portfolio
-						</a>
-						<a class="transition-all text-gray-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 py-[5px] font-medium" data-sveltekit-preload-data="tap" href="/blog">
-							Blog
+						<a class="transition-all text-gray-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 py-[5px] font-medium" data-sveltekit-preload-data="tap" href="/projects">
+							Projects
 						</a>
 					</div>
 				</nav>

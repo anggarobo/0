@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Pokedex",
+        "description": "lorem ipsum",
+        "technologies": ["Nextjs"]
+    },
+    {
+        "name": "Infran",
+        "description": "lorem ipsum",
+        "technologies": ["Reactjs"]
+    },
+    {
+        "name": "Seliso",
+        "description": "lorem ipsum",
+        "technologies": ["Nextjs"]
+    }
+]
