@@ -2,10 +2,10 @@
   import profile_pict from '$lib/assets/20251030_235230.jpg';
 </script>
 
-<div class="w-1/8 mb-8">
-  <img alt="profile_picture" class="rounded-full outline-4 outline-gray-100 opacity-80 hover:opacity-100" src={profile_pict} />
+<div class="w-1/8 mb-8 rounded-full">
+  <img alt="profile_picture" class="rounded-full outline-4 outline-neutral-200 dark:outline-neutral-800 opacity-80 hover:opacity-100" src={profile_pict} />
 </div>
-<h3 class='font-medium font-dmserif italic text-gray-800'>Angga Prabowo</h3>
+<h3 class='font-medium font-dmserif italic'>Angga Prabowo</h3>
 <section class="mt-6">
   <ul>
     <li>
@@ -19,13 +19,13 @@
     </li>
     <li>
       📫 Reach me on: 
-      <a class="text-blue-600 underline" href="https://linkedin.com/in/anggarobo/">Linked In</a>
+      <a class="text-blue-600 hover:text-indigo-600 underline" href="https://linkedin.com/in/anggarobo/">Linked In</a>
       , 
-      <a class="text-blue-600 underline" href="https://github.com/anggarobo/">Github</a>
+      <a class="text-blue-600 hover:text-indigo-600 underline" href="https://github.com/anggarobo/">Github</a>
       , 
-      <a class="text-blue-600 underline" href="https://dev.to/angga">DevTo</a>
+      <a class="text-blue-600 hover:text-indigo-600 underline" href="https://dev.to/angga">DevTo</a>
       , and 
-      <a class="text-blue-600 underline" href="https://x.com/_dikacangin">X</a>
+      <a class="text-blue-600 hover:text-indigo-600 underline" href="https://x.com/_dikacangin">X</a>
        — feel free to drop a message.
     </li>
     <li>😄 Pronouns: he/him.</li>

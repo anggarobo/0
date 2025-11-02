@@ -3,7 +3,7 @@
 </script> -->
 
 
-<h3 class='font-medium font-dmserif italic text-gray-800'>Projects</h3>
+<h3 class='font-medium font-dmserif italic'>Projects</h3>
 <section class="mt-8">
     
     <!-- {#if data.projects.length > 0 }
