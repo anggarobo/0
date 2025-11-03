@@ -2,7 +2,6 @@
     import { marked } from 'marked';
     let { params, data } = $props();
 
-    console.log({params, data})
     let body_html = marked(data.article?.body_markdown)
 </script>
 
