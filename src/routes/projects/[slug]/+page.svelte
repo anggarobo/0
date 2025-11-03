@@ -1,1 +1,1 @@
-<h3 class='font-medium font-dmserif italic'>Experience</h3>
+<h3 class='page-title'>projects/slug</h3>

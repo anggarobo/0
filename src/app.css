@@ -57,6 +57,10 @@
     @apply text-neutral-600 dark:text-neutral-400;
   }
 
+  .page-title {
+    @apply font-dmserif italic font-medium
+  }
+
   /* Headings */
   h1 { @apply text-6xl font-semibold text-neutral-700 dark:text-neutral-300; }
   h2 { @apply text-5xl font-semibold text-neutral-700 dark:text-neutral-300; }

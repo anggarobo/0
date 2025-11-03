@@ -1,5 +1,5 @@
 
-<h3 class='font-medium font-dmserif italic'>Experience</h3>
+<h3 class='page-title'>Experience</h3>
 <section class="mt-8">
     <dl class="grid grid-cols-1 gap-y-4 ">
         <div class="pt-2">

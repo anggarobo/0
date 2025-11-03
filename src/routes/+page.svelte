@@ -5,7 +5,7 @@
 <div class="w-1/8 mb-8 rounded-full outline-4 outline-neutral-200 dark:outline-neutral-800 overflow-hidden">
   <img alt="profile_picture" class="opacity-80 hover:opacity-100" src={profile_pict} />
 </div>
-<h3 class='font-medium font-dmserif italic'>Angga Prabowo</h3>
+<h3 class='page-title'>Angga Prabowo</h3>
 <section class="mt-6">
   <ul>
     <li>
