@@ -10,7 +10,7 @@
             {#each data.listing as article (article.id)}
                 <div class="border-gray-200 pt-2">
                     <dt class="font-medium text-gray-700">
-                        <a data-sveltekit-preload-data="tap" href={article.url}>
+                        <a class="hover:text-neutral-800 dark:hover:text-neutral-200" data-sveltekit-preload-data="tap" href={article.url}>
                             {article.title}
                         </a>
                     </dt>
