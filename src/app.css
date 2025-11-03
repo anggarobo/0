@@ -100,7 +100,7 @@
   .markdown-content h1,
   .markdown-content h2,
   .markdown-content h3 {
-    @apply text-2xl font-dmserif italic font-medium text-neutral-600 dark:text-neutral-400 mt-4 mb-2;
+    @apply text-2xl font-medium text-neutral-600 dark:text-neutral-400 mt-4 mb-2;
   }
 
   .markdown-content p {
