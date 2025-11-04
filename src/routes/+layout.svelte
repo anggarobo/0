@@ -26,13 +26,13 @@
 
 				<nav class="flex flex-row md:flex-col items-start relative overflow-scroll md:px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative">
                     <div class="flex flex-row md:flex-col gap-4 md:gap-0 space-x-0 pr-10 mb-2 mt-2 md:mt-0 items-end">
-						<a class="transition-all text-detailing hover:text-neutral-800 dark:hover:text-neutral-200 py-[5px] font-medium" data-sveltekit-preload-data="tap" href="/blog">
+						<a class="transition-all c-text c-text-hover py-[5px] font-medium" data-sveltekit-preload-data="tap" href="/blog">
 							Blog
 						</a>
-						<a class="transition-all text-detailing hover:text-neutral-800 dark:hover:text-neutral-200 py-[5px] font-medium" data-sveltekit-preload-data="tap" href="/experience">
+						<a class="transition-all c-text c-text-hover py-[5px] font-medium" data-sveltekit-preload-data="tap" href="/experience">
 							Experience
 						</a>
-						<a class="transition-all text-detailing hover:text-neutral-800 dark:hover:text-neutral-200 py-[5px] font-medium" data-sveltekit-preload-data="tap" href="/projects">
+						<a class="transition-all c-text c-text-hover py-[5px] font-medium" data-sveltekit-preload-data="tap" href="/projects">
 							Projects
 						</a>
 					</div>

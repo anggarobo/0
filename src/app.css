@@ -31,7 +31,7 @@
 }
 
 :root {
-    --font-body: "Inter"
+    --font-body: "Inter", "san-serif";
 }
 
 /* 🎨 Custom Base Styles */
@@ -45,16 +45,20 @@
     @apply flex flex-col xl:w-[50vw] md:w-3/4 sm:w-10/12 xs:w-[95%];
   }
 
-  .blur {
-    @apply blur-[10px];
-  }
-
-  .text-heading {
+  .c-text {
     @apply text-neutral-700 dark:text-neutral-300;
   }
 
-  .text-detailing {
-    @apply text-neutral-600 dark:text-neutral-400;
+  .c-text-hover {
+    @apply hover:text-neutral-800 dark:hover:text-neutral-200;
+  }
+
+  .c-text-hover-u {
+    @apply hover:text-neutral-800 dark:hover:text-neutral-200 underline;
+  }
+
+  .blur {
+    @apply blur-[10px];
   }
 
   .page-title {
@@ -76,8 +80,8 @@
   /* Links */
   a { @apply text-blue-600 underline; }
 
-  section { @apply text-neutral-600 dark:text-neutral-400; }
-  dd { @apply text-neutral-500 }
+  section { @apply text-neutral-700 dark:text-neutral-300; }
+  dd { @apply dark:text-neutral-400 text-neutral-600  }
 
   /* Resets */
   html,
@@ -100,11 +104,11 @@
   .markdown-content h1,
   .markdown-content h2,
   .markdown-content h3 {
-    @apply text-2xl font-medium text-neutral-600 dark:text-neutral-400 mt-4 mb-2;
+    @apply text-2xl font-medium text-neutral-700 dark:text-neutral-300 mt-4 mb-2;
   }
 
   .markdown-content p {
-    @apply text-neutral-600 dark:text-neutral-400 mb-4;
+    @apply text-neutral-700 dark:text-neutral-300 mb-4;
   }
 
   .markdown-content ul {
@@ -116,18 +120,22 @@
   }
 
   .markdown-content blockquote {
-    @apply pl-2 my-1 border-l-4 border-l-neutral-200 dark:border-neutral-800
+    @apply pl-2 my-1 border-l-4 border-l-neutral-200 dark:border-neutral-800;
+  }
+
+  .markdown-content blockquote p {
+    @apply  text-neutral-600 dark:text-neutral-400;
   }
 
   .markdown-content code {
-    @apply bg-neutral-200 dark:bg-neutral-800 p-1 rounded text-sm;
+    @apply bg-neutral-200 dark:bg-neutral-800 p-1 rounded text-sm text-neutral-700 dark:text-neutral-300;
   }
 
   .markdown-content pre code {
-    @apply bg-neutral-800 dark:bg-neutral-200 p-1 rounded text-sm;
+    @apply bg-neutral-800 p-1 rounded text-sm text-neutral-300;
   }
 
   .markdown-content pre {
-    @apply bg-neutral-800 dark:bg-neutral-200 p-4 rounded text-neutral-200 dark:text-neutral-800 overflow-x-auto;
+    @apply bg-neutral-800 p-4 rounded text-neutral-200 dark:text-neutral-800 overflow-x-auto;
   }
 }
