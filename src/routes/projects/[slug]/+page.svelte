@@ -1,1 +1,1 @@
-<h3 class='page-title'>projects/slug</h3>
+<h3 class="page-title">projects/slug</h3>

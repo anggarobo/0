@@ -2,11 +2,9 @@
     export let data: { projects: { name: string; description: string; technologies: string[] }[] };
 </script> -->
 
-
-<h3 class='page-title'>Projects</h3>
+<h3 class="page-title">Projects</h3>
 <section class="mt-8">
-    
-    <!-- {#if data.projects.length > 0 }
+	<!-- {#if data.projects.length > 0 }
         <dl class="grid grid-cols-1 gap-y-4 ">
             {#each data.projects as project (project.name)}
                 <div class="border-gray-200 pt-2">
