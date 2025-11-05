@@ -42,6 +42,12 @@
 	--font-body: 'Inter', 'san-serif';
 }
 
+@layer components {
+	.docs-content * {
+		@apply font-sans leading-relaxed text-neutral-700 [all:unset] dark:text-neutral-300;
+	}
+}
+
 /* 🎨 Custom Base Styles */
 @layer base {
 	body {
@@ -74,22 +80,22 @@
 	}
 
 	/* Headings */
-	h1 {
+	h1, .h1 {
 		@apply text-6xl font-semibold text-neutral-700 dark:text-neutral-300;
 	}
-	h2 {
+	h2, .h2 {
 		@apply text-5xl font-semibold text-neutral-700 dark:text-neutral-300;
 	}
-	h3 {
+	h3, .h3 {
 		@apply text-4xl font-semibold text-neutral-700 dark:text-neutral-300;
 	}
-	h4 {
+	h4, .h4 {
 		@apply text-3xl font-semibold text-neutral-700 dark:text-neutral-300;
 	}
-	h5 {
+	h5, .h5 {
 		@apply text-2xl font-semibold text-neutral-700 dark:text-neutral-300;
 	}
-	h6 {
+	h6, .h6 {
 		@apply text-xl font-semibold text-neutral-700 dark:text-neutral-300;
 	}
 

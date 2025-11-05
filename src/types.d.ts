@@ -36,3 +36,10 @@ interface Http<T = unknown, E = Error> {
 	message: string;
 	status: number;
 }
+
+interface MetaDoc {
+	id: string;
+	name: string;
+	mimeType: string;
+	modifiedTime: string;
+}
