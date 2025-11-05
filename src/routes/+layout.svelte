@@ -69,7 +69,7 @@
 				</nav>
 			</div>
 		</aside>
-		<main class="py-12 md:py-4 lg:min-w-[560px]">
+		<main class="py-12 md:py-4 lg:min-w-[560px] box-border">
 			{@render children?.()}
 		</main>
 	</div>
