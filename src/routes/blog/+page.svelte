@@ -11,7 +11,7 @@
 					<dt class="font-medium">
 						<a
 							class="hover:text-neutral-800 dark:hover:text-neutral-200"
-							href={`blog/${article.slug}`}
+							href={`/blog/${article.slug}`}
 						>
 							{article.title}
 						</a>
