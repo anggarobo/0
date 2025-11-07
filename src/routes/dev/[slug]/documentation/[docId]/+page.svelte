@@ -13,7 +13,7 @@
 		return task;
 	});
 
-	const downloadLink = data?.data?.meta?.webViewLink?.split('edit?')[0]+'export?format=pdf'
+	const downloadLink = data?.data?.meta?.webViewLink?.split('edit?')[0] + 'export?format=pdf';
 
 	let container: HTMLDivElement;
 	let div: HTMLHeadElement;
@@ -27,12 +27,14 @@
 </script>
 
 <div bind:this={div}>{taskName}</div>
-<section class="mt-8 relative rounded-xl border-2 border-neutral-200 bg-neutral-50 px-4 dark:bg-neutral-100">
+<section
+	class="relative mt-8 rounded-xl border-2 border-neutral-200 bg-neutral-50 px-4 dark:bg-neutral-100"
+>
 	<div class="docs-container" bind:this={container}></div>
 	<div class="text-right">
 		<a
 			aria-label="download-link"
-			class="transition-ease-linear transition-delay-300 bg-gray-100 absolute rounded-r-xl top-4 -right-10 w-10 h-10 border-2 border-neutral-200 hover:py-4 py-0 hover:text-indigo-600 overflow-hidden flex justify-center items-center"
+			class="absolute -top-3 -right-3 flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg border-2 border-neutral-200 bg-gray-100/90 text-indigo-700 hover:text-indigo-600"
 			href={downloadLink}
 			download={true}
 			title="Download"

@@ -15,7 +15,7 @@
 			<dt class="font-medium">
 				<a
 					class="hover:text-neutral-800 dark:hover:text-neutral-200"
-					href={`/documentation/${doc.id}`}
+					href={`/dev/${params.slug}/documentation/${doc.id}`}
 				>
 					{doc.name?.split('|')?.[1]?.replace('[GO]', '')?.replace('.docx', '') ||
 						doc.name?.replace('.docx', '')}

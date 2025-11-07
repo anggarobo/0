@@ -43,3 +43,31 @@ interface MetaDoc {
 	mimeType: string;
 	modifiedTime: string;
 }
+
+interface SheetRow {
+	id: string;
+	ticket: string;
+	task_name: string;
+	meta: {
+		document_no?: string;
+		project?: string;
+		revision_no?: number;
+		budget_days?: string;
+		date?: string;
+		revision_date?: string;
+		assignee?: string;
+		target_release?: string;
+		release_date?: string;
+	};
+	content: {
+		description: {
+			brief?: string;
+			detail?: string;
+		};
+		process_flow?: string;
+		design?: {
+			ui: string;
+			db: string;
+		};
+	};
+}

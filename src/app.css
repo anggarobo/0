@@ -42,6 +42,10 @@
 	--font-body: 'Inter', 'san-serif';
 }
 
+.material-icons-outlined {
+	display: inline-block; /* Pastikan ikon tampil sebagai inline element */
+}
+
 @layer components {
 	.docs-content * {
 		@apply font-sans leading-relaxed text-neutral-700 [all:unset] dark:text-neutral-300;
