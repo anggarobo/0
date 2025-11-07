@@ -4,9 +4,7 @@ import { error } from '@sveltejs/kit';
 import TurndownService from 'turndown';
 import { google } from 'googleapis';
 
-const {
-	GOOGLE_API_KEY
-} = env;
+const { GOOGLE_API_KEY } = env;
 
 export const load: PageServerLoad = async ({ /** cookies, */ params }) => {
 	try {

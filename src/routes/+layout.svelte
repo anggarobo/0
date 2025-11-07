@@ -13,14 +13,14 @@
 			return [
 				{ label: 'Blog', path: '/blog' },
 				{ label: 'Experience', path: '/experience' },
-				{ label: 'Projects', path: '/projects' },
-			]
+				{ label: 'Projects', path: '/projects' }
+			];
 		}
-		return [{ label: 'Back', path: '/dev/dataon/dde' }]
+		return [{ label: 'DDE', path: '/dev/dataon/dde' }];
 	});
 	const toRootDev = () => {
-		window.location.href = 'dev/dataon'
-	}
+		window.location.href = 'dev/dataon';
+	};
 </script>
 
 <svelte:head>
@@ -48,7 +48,7 @@
 							/>
 						</a>
 					{:else}
-						<button class="cursor-pointer" onclick={toRootDev} >
+						<button class="cursor-pointer" onclick={toRootDev}>
 							<img
 								alt="angga"
 								class="opacity-85 group-hover:opacity-100 dark:brightness-500"
@@ -62,7 +62,7 @@
 					class="fade relative flex scroll-pr-6 flex-row items-start overflow-scroll pb-0 md:relative md:flex-col md:overflow-auto md:px-0"
 				>
 					<div
-						class={`mt-2 mb-2 flex flex-row items-end gap-4 space-x-0 md:mt-0 md:flex-col md:gap-0 ${isDevCo ? 'pl-10' : 'pr-10'}`}
+						class={`mt-2 mb-2 flex flex-row items-end gap-4 space-x-0 md:mt-0 md:flex-col md:gap-0 ${isDevCo ? 'md:pl-10 pr-10' : 'pr-10'}`}
 					>
 						{#each menu as item (item.path)}
 							<a
