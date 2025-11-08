@@ -4,19 +4,54 @@
 	import { onMount } from 'svelte';
 
 	let { params } = $props();
-	const task = writable<SheetRow>(undefined);
+	// const task = writable<SheetRow>(undefined);
+	const task = writable<DDE>(undefined);
+	const staticData = writable<StaticDataDDE>(undefined);
 	const row = page.url.searchParams.get('row');
 
-	async function download() {
-		const payload: SheetRow = {
+	// async function download() {
+	// 	const payload: SheetRow = {
+	// 		content: $task.content,
+	// 		meta: $task.meta,
+	// 		id: $task.id,
+	// 		task_name: $task.task_name,
+	// 		ticket: $task.ticket
+	// 	};
+	// 	try {
+	// 		const response = await fetch('/api/sheets/download', {
+	// 			body: JSON.stringify(payload),
+	// 			method: 'POST',
+	// 			headers: { 'Content-Type': 'application/json' }
+	// 		});
+	// 		const blob = await response.blob();
+	// 		const url = URL.createObjectURL(blob);
+	// 		const a = document.createElement('a');
+	// 		a.href = url;
+	// 		a.download = `${$task.ticket}.pdf`;
+	// 		a.click();
+	// 		URL.revokeObjectURL(url);
+	// 	} catch (err) {
+	// 		console.error(err);
+	// 	}
+	// }
+
+	async function downloadDde() {
+		const payload: DDE & StaticDataDDE = {
 			content: $task.content,
-			meta: $task.meta,
 			id: $task.id,
 			task_name: $task.task_name,
-			ticket: $task.ticket
+			ticket: $task.ticket,
+			budget_days: $task.budget_days,
+			date: $task.date,
+			document_no: $task.document_no,
+			target_release: $task.target_release,
+			release_date: $task.release_date,
+			revision_date: $task.revision_date,
+			revision_no: $task.revision_no,
+			...$staticData
 		};
 		try {
-			const response = await fetch('/api/sheets/download', {
+			const response = await fetch('/api/dde/export', {
 				body: JSON.stringify(payload),
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' }
@@ -34,11 +69,20 @@
 	}
 
 	async function loadData() {
-		const res = await fetch(`/api/sheets?ticket=${params.ticket}&row=${row}`);
+		const res = await fetch(`/api/dde?ticket=${params.ticket}&row=${row}`);
 		const { data } = await res.json();
+		console.log({ data });
 		task.set(data[0]);
 	}
 
+	async function loadStaticData() {
+		const res = await fetch(`/api/dde/static?ticket=${params.ticket}&row=${row}`);
+		const { data } = await res.json();
+		console.log({ staticData: data });
+		staticData.set(data[0]);
+	}
+
+	onMount(loadStaticData);
 	onMount(loadData);
 </script>
 
@@ -50,46 +94,46 @@
 		<button
 			title="Download"
 			class="absolute top-0 right-0 cursor-pointer text-neutral-600 hover:text-indigo-600 dark:text-neutral-400"
-			onclick={download}
+			onclick={downloadDde}
 		>
 			<span class="material-symbols-rounded"> archive </span>
 		</button>
 		<div class="flex items-center gap-2 text-neutral-600 dark:text-neutral-400">
 			<span class="material-symbols-rounded"> snippet_folder </span>
 			<p>
-				{$task.meta?.project}
-			</p>
-		</div>
-		<div class="flex items-center gap-2 text-neutral-600 dark:text-neutral-400">
-			<span class="material-symbols-rounded"> date_range </span>
-			<p>
-				{$task.meta?.date}
+				{$staticData?.project}
 			</p>
 		</div>
 		<div class="flex items-center gap-2 text-neutral-600 dark:text-neutral-400">
 			<span class="material-symbols-rounded"> calendar_clock </span>
 			<p>
-				{$task.meta?.budget_days}
+				{$task?.date}
 			</p>
 		</div>
 		<div class="flex items-center gap-2 text-neutral-600 dark:text-neutral-400">
-			<span class="material-symbols-rounded"> deployed_code </span>
+			<span class="material-symbols-rounded"> hourglass_top </span>
 			<p>
-				{$task.meta?.release_date || '-'} / {$task.meta?.target_release}
+				{$task?.budget_days}
+			</p>
+		</div>
+		<div class="flex items-center gap-2 text-neutral-600 dark:text-neutral-400">
+			<span class="material-symbols-rounded"> rocket_launch </span>
+			<p>
+				{$task?.release_date || '-'} / {$task?.target_release}
 			</p>
 		</div>
 	</div>
 	<section class="mt-8">
 		<div class="mt-4">
 			<p class="c-text text-xl font-semibold">Description</p>
-			<div class="c-text">{@html $task.content.description.brief}</div>
-			<div class="c-text mt-4">{@html $task.content.description.detail}</div>
+			<div class="c-text">{@html $task.content.brief_description}</div>
+			<div class="c-text mt-4">{@html $task.content.detail_description}</div>
 		</div>
 		<div class="mt-4">
 			<p class="c-text text-xl font-semibold">Process Flow</p>
-			<div class="c-text">{@html $task.content.description.brief}</div>
+			<div class="c-text">{@html $task.content.process_flow}</div>
 		</div>
 	</section>
 {:else}
-	<p class="text-gray-500">Loading...</p>
+	<p class="text-gray-500">Fetching...</p>
 {/if}

@@ -1,6 +1,6 @@
 // src/routes/api/sheets/download/+server.ts
 import { type RequestHandler } from '@sveltejs/kit';
-import { googleApi } from '$lib/utils/google';
+import { googleApi, htmlToDocsRequests } from '$lib/utils/google';
 import { env } from '$env/dynamic/private';
 import type { docs_v1 } from 'googleapis';
 
@@ -22,16 +22,23 @@ export const POST: RequestHandler = async ({ request }) => {
 			'{{ticket}}': ticket
 		};
 
+		const { docs, drive } = await googleApi();
+
+		let briefDescription: docs_v1.Schema$Request[] = [];
+		let detailDescription: docs_v1.Schema$Request[] = [];
+
+		if (content.description?.brief) {
+			briefDescription = htmlToDocsRequests(content.description.brief, '{{brief_description}}');
+		}
+
+		if (content.description?.detail) {
+			detailDescription = htmlToDocsRequests(content.description.detail, '{{detail_description}}');
+		}
+
 		Object.entries(template).forEach(([key, value]) => {
 			const excList = ['revision_no', 'revision_date', 'assignee', 'project'];
 			if (value && !excList.includes(key)) {
 				placeholders[`{{${key}}}`] = `${value}`;
-			}
-			if (content.description?.brief) {
-				placeholders['{{brief_description}}'] = content.description.brief;
-			}
-			if (content.description?.detail) {
-				placeholders['{{detail_description}}'] = content.description.detail;
 			}
 		});
 
@@ -44,12 +51,14 @@ export const POST: RequestHandler = async ({ request }) => {
 			return reduce;
 		}, {});
 
-		const requests = Object.entries(placeholders).map(([text, replaceText = '']) => ({
-			replaceAllText: {
-				containsText: { matchCase: true, text },
-				replaceText
-			}
-		}));
+		const requests: docs_v1.Schema$Request[] = Object.entries(placeholders).map(
+			([text, replaceText = '']) => ({
+				replaceAllText: {
+					containsText: { matchCase: true, text },
+					replaceText
+				}
+			})
+		);
 
 		const resetRequests: docs_v1.Schema$Request[] = Object.entries(resetPlaceHolders).map(
 			([text, replaceText = '']) => ({
@@ -60,11 +69,46 @@ export const POST: RequestHandler = async ({ request }) => {
 			})
 		);
 
-		const { docs, drive } = await googleApi();
+		const resetReq = (
+			reqs: docs_v1.Schema$Request[],
+			placeholder: string
+		): docs_v1.Schema$Request[] => {
+			return reqs.map((t, i) => {
+				// if (i === 0) {
+				// 	return {
+				// 		insertText: {
+				// 			location: { index: 1 },
+				// 			text: `${placeholder}\n`
+				// 		}
+				// 	};
+				// }
+
+				return {
+					replaceAllText: {
+						replaceText: ''
+					}
+					// deleteContentRange: {
+					// 	range: {
+					// 		startIndex: 1, // bisa disesuaikan dengan posisi realnya
+					// 		endIndex: 999999
+					// 	}
+					// }
+				};
+			});
+		};
+
+		const resetBrief: docs_v1.Schema$Request[] = resetReq(
+			briefDescription,
+			'{{brief_description}}'
+		);
+		const resetDetail: docs_v1.Schema$Request[] = resetReq(
+			briefDescription,
+			'{{detail_description}}'
+		);
 
 		await docs.documents.batchUpdate({
 			documentId,
-			requestBody: { requests }
+			requestBody: { requests: [...requests, ...briefDescription, ...detailDescription] }
 		});
 
 		const res = await drive.files.export(
@@ -78,7 +122,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 		await docs.documents.batchUpdate({
 			documentId,
-			requestBody: { requests: resetRequests }
+			requestBody: { requests: [...resetRequests] }
 		});
 
 		return new Response(Buffer.from(res.data), {
