@@ -37,64 +37,68 @@ export const POST: RequestHandler = async ({ request }) => {
 		// Baca dan proses DOCX template
 		const content = fs.readFileSync(tempDocxPath, 'binary');
 		const zip = new PizZip(content);
-        const imageModule = new (ImageModule as any)({
-			centered: true,
-			getImage: async (tagValue: string) => {
-                console.log({tagValue})
+		// const imageModule = new ImageModule({
+		// 	centered: true,
+		// 	getImage: async (tagValue: string) => {
+		// 		if (!tagValue) return null;
+
+		// 		// Base64 data URI
+		// 		if (tagValue.startsWith('data:image')) {
+		// 			const base64 = tagValue.split(',')[1];
+		// 			return Buffer.from(base64, 'base64');
+		// 		}
+
+		// 		// URL eksternal (http / https)
+		// 		if (tagValue.startsWith('http')) {
+		// 			const res = await fetch(tagValue);
+		// 			if (!res.ok) throw new Error(`Failed to fetch image: ${tagValue}`);
+		// 			const arrayBuffer = await res.arrayBuffer();
+		// 			return Buffer.from(arrayBuffer);
+		// 		}
+
+		// 		// Kalau bukan base64 atau URL → skip
+		// 		return null;
+		// 	},
+		// 	getSize: (imgBuffer: Buffer) => {
+		// 		try {
+		// 			const { width, height } = sizeOf(imgBuffer);
+		// 			const maxWidth = 120; // agar tabel tidak pecah
+		// 			const ratio = Math.min(maxWidth / width, 1);
+		// 			return [width * ratio, height * ratio];
+		// 		} catch {
+		// 			return [100, 60];
+		// 		}
+		// 	}
+		// });
+
+		const imageModule = new ImageModule({
+			getImage: (tagValue: string) => {
 				if (!tagValue) return null;
 
-				// Base64 data URI
 				if (tagValue.startsWith('data:image')) {
 					const base64 = tagValue.split(',')[1];
 					return Buffer.from(base64, 'base64');
 				}
 
-				// URL eksternal (http / https)
 				if (tagValue.startsWith('http')) {
-					const res = await fetch(tagValue);
-					if (!res.ok) throw new Error(`Failed to fetch image: ${tagValue}`);
-					const arrayBuffer = await res.arrayBuffer();
-					return Buffer.from(arrayBuffer);
+					fetch(tagValue)
+						.then((res) => res.arrayBuffer())
+						.then((res) => Buffer.from(res))
+						.catch(() => null);
 				}
-
-				// Kalau bukan base64 atau URL → skip
 				return null;
 			},
-			getSize: (imgBuffer: Buffer) => {
-
-                console.log({imgBuffer})
-				try {
-					const { width, height } = sizeOf(imgBuffer);
-					const maxWidth = 120; // agar tabel tidak pecah
-					const ratio = Math.min(maxWidth / width, 1);
-					return [width * ratio, height * ratio];
-				} catch {
-					return [100, 60];
-				}
-			}
+			getSize: (img: Buffer) => {
+				const dimensions = sizeOf(img);
+				return [dimensions.width || 100, dimensions.height || 100];
+			},
+			centered: true
 		});
-		// const imageModule = new ImageModule({
-		// 	getImage: (tagValue: string) => {
-		// 		if (!tagValue) return null;
-		// 		try {
-		// 			const base64Data = tagValue.replace(/^data:image\/\w+;base64,/, '');
-		// 			return Buffer.from(base64Data, 'base64');
-		// 		} catch {
-		// 			return null;
-		// 		}
-		// 	},
-		// 	getSize: (img: Buffer) => {
-		// 		const dimensions = sizeOf(img);
-		// 		return [dimensions.width || 100, dimensions.height || 100];
-		// 	},
-		// 	centered: true
-		// });
 
 		const doc = new Docxtemplater(zip, {
 			modules: [imageModule],
 			delimiters: { start: '{{', end: '}}' },
-			nullGetter: () => '-',
-            parser
+			nullGetter: () => '-'
 		});
 
 		// Isi placeholder
