@@ -174,7 +174,6 @@ function htmlToDocsRequests(htmlString: string, placeholder: string): docs_v1.Sc
 		}
 	});
 
-	// console.log('Generated requests:', requests.length);
 	return requests;
 }
 

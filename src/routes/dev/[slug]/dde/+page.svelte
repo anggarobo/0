@@ -11,13 +11,10 @@
 		const res = await fetch('/api/dde');
 		const { data } = await res.json();
 		if (data) {
-			console.log(data);
 			rows.set(data);
 			loading = false;
 		}
 	}
-
-	console.log($rows);
 
 	onMount(loadData);
 </script>

@@ -71,14 +71,12 @@
 	async function loadData() {
 		const res = await fetch(`/api/dde?ticket=${params.ticket}&row=${row}`);
 		const { data } = await res.json();
-		console.log({ data });
 		task.set(data[0]);
 	}
 
 	async function loadStaticData() {
 		const res = await fetch(`/api/dde/static?ticket=${params.ticket}&row=${row}`);
 		const { data } = await res.json();
-		console.log({ staticData: data });
 		staticData.set(data[0]);
 	}
 

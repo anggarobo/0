@@ -21,12 +21,10 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 
 		// Membaca file template DOCX
-		console.log(templatePath);
 		const tempDocxPath = path.resolve('tmp', `${data.ticket}_temp.docx`);
 		fs.copyFileSync(templatePath, tempDocxPath);
 
 		const contentBuffer = fs.readFileSync(tempDocxPath, 'binary');
-		console.log(contentBuffer);
 
 		// Menggunakan Mammoth untuk mengonversi DOCX ke HTML
 		const { value: htmlContent } = await mammoth.convertToHtml({
