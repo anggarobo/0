@@ -71,3 +71,53 @@ interface SheetRow {
 		};
 	};
 }
+
+interface DDE {
+	id: string;
+	ticket: string;
+	document_no: string;
+	task_name: string;
+	revision_no?: number;
+	budget_days: string;
+	date: string;
+	revision_date?: string;
+	target_release: string;
+	release_date?: string;
+	content: {
+		brief_description: string;
+		detail_description: string;
+		process_flow: string;
+		ui_design?: string;
+		db_design?: string;
+	};
+}
+
+interface StaticDataDDE {
+	logo: string;
+	document_type: string;
+	assignee: string;
+	prepared_by: string;
+	sign_prepared_by: string;
+	position_prepared_by: string;
+	approver1: string;
+	sign_approver1: string;
+	position_approver1: string;
+	approver2: string;
+	sign_approver2: string;
+	position_approver2: string;
+	project: string;
+}
+
+declare module 'docxtemplater-image-module-free' {
+	import type { Buffer } from 'buffer';
+
+	interface ImageModuleOptions {
+		getImage: (tagValue: string) => Buffer | null;
+		getSize: (img: Buffer) => [number, number];
+		centered?: boolean;
+	}
+
+	export default class ImageModule {
+		constructor(options: ImageModuleOptions);
+	}
+}

@@ -62,7 +62,7 @@
 					class="fade relative flex scroll-pr-6 flex-row items-start overflow-scroll pb-0 md:relative md:flex-col md:overflow-auto md:px-0"
 				>
 					<div
-						class={`mt-2 mb-2 flex flex-row items-end gap-4 space-x-0 md:mt-0 md:flex-col md:gap-0 ${isDevCo ? 'md:pl-10 pr-10' : 'pr-10'}`}
+						class={`mt-2 mb-2 flex flex-row items-end gap-4 space-x-0 md:mt-0 md:flex-col md:gap-0 ${isDevCo ? 'pr-10 md:pl-10' : 'pr-10'}`}
 					>
 						{#each menu as item (item.path)}
 							<a
