@@ -8,7 +8,7 @@
 	const task = writable<DDE>(undefined);
 	const staticData = writable<StaticDataDDE>(undefined);
 	const row = page.url.searchParams.get('row');
-	let loading = $state({ download: false, task: false, staticData: false })
+	let loading = $state({ download: false, task: false, staticData: false });
 
 	// async function download() {
 	// 	const payload: SheetRow = {
@@ -51,7 +51,7 @@
 			revision_no: $task.revision_no,
 			...$staticData
 		};
-		loading.download = true
+		loading.download = true;
 		try {
 			const response = await fetch('/api/dde/export', {
 				body: JSON.stringify(payload),
@@ -68,33 +68,33 @@
 		} catch (err) {
 			console.error(err);
 		} finally {
-			loading.download = false
+			loading.download = false;
 		}
 	}
 
 	async function loadData() {
-		loading.task = true
+		loading.task = true;
 		try {
 			const res = await fetch(`/api/dde?ticket=${params.ticket}&row=${row}`);
 			const { data } = await res.json();
 			task.set(data[0]);
 		} catch (error) {
-			console.error(error)
+			console.error(error);
 		} finally {
-			loading.task = false
+			loading.task = false;
 		}
 	}
 
 	async function loadStaticData() {
-		loading.staticData = true
+		loading.staticData = true;
 		try {
 			const res = await fetch(`/api/dde/static?ticket=${params.ticket}&row=${row}`);
 			const { data } = await res.json();
 			staticData.set(data[0]);
 		} catch (error) {
-			console.error(error)
+			console.error(error);
 		} finally {
-			loading.staticData = false
+			loading.staticData = false;
 		}
 	}
 
@@ -152,6 +152,6 @@
 	</section>
 {:else if loading.task}
 	<p class="text-gray-500">Fetching...</p>
-{:else }
+{:else}
 	<p class="text-gray-500">Something went wrong</p>
 {/if}

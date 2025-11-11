@@ -7,7 +7,7 @@ export const GET: RequestHandler = async ({ url }) => {
 		const rowParam = url.searchParams.get('row') || '';
 		let RANGE = `DDE!A6:O`;
 
-		if (!rowParam) {
+		if (rowParam) {
 			RANGE = `DDE!A${rowParam}:O${rowParam}`;
 		}
 		const res = await sheets.spreadsheets.values.get({
@@ -17,7 +17,7 @@ export const GET: RequestHandler = async ({ url }) => {
 
 		const values = res.data.values || [];
 		let data: DDE[] = [];
-		const nSlice = !rowParam ? 1 : 0
+		const nSlice = !rowParam ? 1 : 0;
 		data = values.slice(nSlice).map((row) => ({
 			id: row[0],
 			ticket: row[1],
@@ -38,9 +38,9 @@ export const GET: RequestHandler = async ({ url }) => {
 			}
 		}));
 
-		return json({data});
+		return json({ data });
 	} catch (err) {
-		console.error(err)
-		return json({ error: err })
+		console.error(err);
+		return json({ error: err });
 	}
 };
