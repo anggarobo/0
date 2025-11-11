@@ -8,6 +8,7 @@
 	const task = writable<DDE>(undefined);
 	const staticData = writable<StaticDataDDE>(undefined);
 	const row = page.url.searchParams.get('row');
+	let loading = $state({ download: false, task: false, staticData: false })
 
 	// async function download() {
 	// 	const payload: SheetRow = {
@@ -35,7 +36,7 @@
 	// 	}
 	// }
 
-	async function downloadDde() {
+	async function download() {
 		const payload: DDE & StaticDataDDE = {
 			content: $task.content,
 			id: $task.id,
@@ -50,6 +51,7 @@
 			revision_no: $task.revision_no,
 			...$staticData
 		};
+		loading.download = true
 		try {
 			const response = await fetch('/api/dde/export', {
 				body: JSON.stringify(payload),
@@ -65,26 +67,42 @@
 			URL.revokeObjectURL(url);
 		} catch (err) {
 			console.error(err);
+		} finally {
+			loading.download = false
 		}
 	}
 
 	async function loadData() {
-		const res = await fetch(`/api/dde?ticket=${params.ticket}&row=${row}`);
-		const { data } = await res.json();
-		task.set(data[0]);
+		loading.task = true
+		try {
+			const res = await fetch(`/api/dde?ticket=${params.ticket}&row=${row}`);
+			const { data } = await res.json();
+			task.set(data[0]);
+		} catch (error) {
+			console.error(error)
+		} finally {
+			loading.task = false
+		}
 	}
 
 	async function loadStaticData() {
-		const res = await fetch(`/api/dde/static?ticket=${params.ticket}&row=${row}`);
-		const { data } = await res.json();
-		staticData.set(data[0]);
+		loading.staticData = true
+		try {
+			const res = await fetch(`/api/dde/static?ticket=${params.ticket}&row=${row}`);
+			const { data } = await res.json();
+			staticData.set(data[0]);
+		} catch (error) {
+			console.error(error)
+		} finally {
+			loading.staticData = false
+		}
 	}
 
 	onMount(loadStaticData);
 	onMount(loadData);
 </script>
 
-{#if Boolean($task)}
+{#if !loading.task && Boolean($task)}
 	<h3 class="page-title">{$task.task_name}</h3>
 	<p class="c-text mt-1 text-neutral-500">{$task.ticket}</p>
 
@@ -92,7 +110,7 @@
 		<button
 			title="Download"
 			class="absolute top-0 right-0 cursor-pointer text-neutral-600 hover:text-indigo-600 dark:text-neutral-400"
-			onclick={downloadDde}
+			onclick={download}
 		>
 			<span class="material-symbols-rounded"> archive </span>
 		</button>
@@ -132,6 +150,8 @@
 			<div class="c-text">{@html $task.content.process_flow}</div>
 		</div>
 	</section>
-{:else}
+{:else if loading.task}
 	<p class="text-gray-500">Fetching...</p>
+{:else }
+	<p class="text-gray-500">Data not found</p>
 {/if}
