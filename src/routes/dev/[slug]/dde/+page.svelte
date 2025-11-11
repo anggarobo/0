@@ -7,11 +7,16 @@
 
 	async function loadData() {
 		loading = true;
-		// const res = await fetch('/api/sheets');
-		const res = await fetch('/api/dde');
-		const { data } = await res.json();
-		if (data) {
-			rows.set(data);
+		try {
+			// const res = await fetch('/api/sheets');
+			const res = await fetch('/api/dde');
+			const { data } = await res.json();
+			if (data) {
+				rows.set(data);
+			}
+		} catch (error) {
+			console.error(error)
+		} finally {
 			loading = false;
 		}
 	}
