@@ -153,5 +153,5 @@
 {:else if loading.task}
 	<p class="text-gray-500">Fetching...</p>
 {:else }
-	<p class="text-gray-500">Data not found</p>
+	<p class="text-gray-500">Something went wrong</p>
 {/if}

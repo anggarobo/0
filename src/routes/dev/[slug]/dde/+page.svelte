@@ -27,9 +27,7 @@
 <h3 class="page-title">Detailed Development Enhancement</h3>
 <section class="mt-8">
 	<dl class="grid grid-cols-1 gap-y-4">
-		{#if loading}
-			<p class="text-gray-500">Fetching...</p>
-		{:else}
+		{#if $rows.length && !loading}
 			{#each $rows as r}
 				<div class="pt-2">
 					<dt class="font-medium">
@@ -38,6 +36,10 @@
 					<dd class="mt-2 text-sm">{r.ticket}</dd>
 				</div>
 			{/each}
+		{:else if loading}
+			<p class="text-gray-500">Fetching...</p>
+		{:else}
+			<p class="text-gray-500">Something went wrong</p>
 		{/if}
 	</dl>
 </section>

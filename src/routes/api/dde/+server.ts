@@ -4,11 +4,11 @@ import { googleApi, SPREADSHEET_ID } from '$lib/utils/google';
 export const GET: RequestHandler = async ({ url }) => {
 	try {
 		const { sheets } = await googleApi();
-		const row = url.searchParams.get('row');
+		const rowParam = url.searchParams.get('row') || '';
 		let RANGE = `DDE!A6:O`;
 
-		if (row !== null) {
-			RANGE = `DDE!A${row}:O${row}`;
+		if (!rowParam) {
+			RANGE = `DDE!A${rowParam}:O${rowParam}`;
 		}
 		const res = await sheets.spreadsheets.values.get({
 			spreadsheetId: SPREADSHEET_ID,
@@ -17,7 +17,7 @@ export const GET: RequestHandler = async ({ url }) => {
 
 		const values = res.data.values || [];
 		let data: DDE[] = [];
-		const nSlice = row !== null ? 0 : 1;
+		const nSlice = !rowParam ? 1 : 0
 		data = values.slice(nSlice).map((row) => ({
 			id: row[0],
 			ticket: row[1],
