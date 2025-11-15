@@ -109,10 +109,25 @@
 	<div class="relative mt-6 grid grid-cols-1 gap-2 md:grid-cols-2">
 		<button
 			title="Download"
-			class="absolute top-0 right-0 cursor-pointer text-neutral-600 hover:text-indigo-600 dark:text-neutral-400"
+			class="absolute top-0 right-0 flex cursor-pointer items-center justify-center text-neutral-600 hover:text-indigo-600 dark:text-neutral-400"
 			onclick={download}
 		>
-			<span class="material-symbols-rounded"> archive </span>
+			{#if loading.download}
+				<svg
+					class="size-5 animate-spin text-neutral-600 dark:text-neutral-400"
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"
+					></circle><path
+						class="opacity-75"
+						fill="currentColor"
+						d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+					></path></svg
+				>
+			{:else}
+				<span class="material-symbols-rounded animate-bounce"> arrow_downward </span>
+			{/if}
 		</button>
 		<div class="flex items-center gap-2 text-neutral-600 dark:text-neutral-400">
 			<span class="material-symbols-rounded"> snippet_folder </span>

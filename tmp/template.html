@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="id">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Template Dokumen Proyek</title>
+		<style>
+			body {
+				font-family: 'Times New Roman', Times, serif;
+				margin: 40px;
+				color: #000;
+				line-height: 1.5;
+			}
+			.container {
+				width: 100%;
+				max-width: 800px;
+				margin: 0 auto;
+			}
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin-bottom: 20px;
+			}
+			td {
+				padding: 6px 10px;
+				vertical-align: top;
+				border: none;
+			}
+			.label {
+				font-weight: bold;
+				width: 180px;
+			}
+			.value {
+				width: auto;
+			}
+			.header {
+				text-align: center;
+				margin-bottom: 30px;
+				font-size: 18px;
+				font-weight: bold;
+			}
+			.section {
+				margin-bottom: 30px;
+			}
+			.section-title {
+				font-weight: bold;
+				font-size: 16px;
+				margin-bottom: 10px;
+				border-bottom: 1px solid #000;
+				padding-bottom: 3px;
+			}
+			.placeholder {
+				color: #1a0dab;
+				font-style: italic;
+			}
+			.signature {
+				margin-top: 50px;
+			}
+			.signature table {
+				width: 100%;
+			}
+			.signature td {
+				padding: 5px 0;
+				vertical-align: bottom;
+			}
+			.sig-line {
+				border-top: 1px solid #000;
+				width: 200px;
+				margin-top: 40px;
+			}
+			.sig-name {
+				font-weight: bold;
+			}
+			.sig-pos {
+				font-size: 12px;
+				color: #555;
+			}
+			@media print {
+				body {
+					margin: 20mm;
+				}
+				.container {
+					max-width: none;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<!-- Header -->
+			<div class="header">DOKUMEN SPESIFIKASI PROYEK</div>
+
+			<!-- Informasi Utama (2 kolom) -->
+			<table>
+				<tr>
+					<td class="label">Project</td>
+					<td class="value"><span class="placeholder">{{project}}</span></td>
+					<td class="label">Date</td>
+					<td class="value"><span class="placeholder">{{date}}</span></td>
+				</tr>
+				<tr>
+					<td class="label">Revision No.</td>
+					<td class="value"><span class="placeholder">{{revision_no}}</span></td>
+					<td class="label">Revision Date</td>
+					<td class="value"><span class="placeholder">{{revision_date}}</span></td>
+				</tr>
+				<tr>
+					<td class="label">Reference No.</td>
+					<td class="value"><span class="placeholder">{{ticket}}</span></td>
+					<td class="label">Assignee</td>
+					<td class="value"><span class="placeholder">{{assignee}}</span></td>
+				</tr>
+				<tr>
+					<td class="label">Budget Days</td>
+					<td class="value"><span class="placeholder">{{budget_days}}</span></td>
+					<td class="label">Target Release</td>
+					<td class="value"><span class="placeholder">{{target_release}}</span></td>
+				</tr>
+			</table>
+
+			<!-- Brief Description -->
+			<div class="section">
+				<div class="section-title">Brief Description</div>
+				<p><span class="placeholder">{{brief_description}}</span></p>
+			</div>
+
+			<!-- Process Flow -->
+			<div class="section">
+				<div class="section-title">Process Flow</div>
+				<p><span class="placeholder">{{process_flow}}</span></p>
+			</div>
+
+			<!-- Detail Description -->
+			<div class="section">
+				<div class="section-title">Detail Description</div>
+				<p><span class="placeholder">{{detail_description}}</span></p>
+			</div>
+
+			<!-- User Interface Design -->
+			<div class="section">
+				<div class="section-title">User Interface Design</div>
+				<p><span class="placeholder">{{ui_design}}</span></p>
+			</div>
+
+			<!-- Database Design -->
+			<div class="section">
+				<div class="section-title">Database Design</div>
+				<p><span class="placeholder">{{db_design}}</span></p>
+			</div>
+
+			<!-- Signatures -->
+			<div class="signature">
+				<table>
+					<tr>
+						<td style="width: 33%">
+							<div><strong>Prepared By:</strong></div>
+							<div class="sig-line"></div>
+							<div class="sig-name"><span class="placeholder">{{prepared_by}}</span></div>
+							<div class="sig-pos"><span class="placeholder">{{position_prepered_by}}</span></div>
+							<div>Date: <span class="placeholder">{{sign_prepared_by}}</span></div>
+						</td>
+						<td style="width: 33%">
+							<div><strong>Approved By:</strong></div>
+							<div class="sig-line"></div>
+							<div class="sig-name"><span class="placeholder">{{approver1}}</span></div>
+							<div class="sig-pos"><span class="placeholder">{{position_approver1}}</span></div>
+							<div>Date: <span class="placeholder">{{sign_approver1}}</span></div>
+						</td>
+						<td style="width: 33%">
+							<div><strong>Approved By:</strong></div>
+							<div class="sig-line"></div>
+							<div class="sig-name"><span class="placeholder">{{approver2}}</span></div>
+							<div class="sig-pos"><span class="placeholder">{{position_approver2}}</span></div>
+							<div>Date: <span class="placeholder">{{sign_approver2}}</span></div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>

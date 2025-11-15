@@ -4,8 +4,9 @@ import PizZip from 'pizzip';
 import Docxtemplater from 'docxtemplater';
 import { json, type RequestHandler } from '@sveltejs/kit';
 import libre from 'libreoffice-convert';
-import ImageModule from 'docxtemplater-image-module-free';
+import ImageModule, { type ImageModuleOptions } from 'docxtemplater-image-module-free';
 import sizeOf from 'image-size';
+// import { Parser, XmlRenderer } from 'commonmark';
 
 const convertAsync = (inputBuffer: Buffer, format: string): Promise<Buffer> => {
 	return new Promise((resolve, reject) => {
@@ -16,15 +17,42 @@ const convertAsync = (inputBuffer: Buffer, format: string): Promise<Buffer> => {
 	});
 };
 
+function base64DataURLToArrayBuffer(tagValue: string): Buffer<ArrayBuffer> | null {
+	const base64Regex = /^(?:data:)?image\/(png|jpg|jpeg|svg|svg\+xml);base64,/;
+
+	const validBase64 = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
+
+	if (typeof tagValue !== 'string' || !base64Regex.test(tagValue)) {
+		return null;
+	}
+
+	const stringBase64 = tagValue.replace(base64Regex, '');
+
+	if (!validBase64.test(stringBase64)) {
+		throw new Error('Error parsing base64 data, your data contains invalid characters');
+	}
+
+	// For nodejs, return a Buffer
+	if (typeof Buffer !== 'undefined' && Buffer.from) {
+		return Buffer.from(stringBase64, 'base64');
+	}
+
+	return null;
+}
+
 export const POST: RequestHandler = async ({ request }) => {
 	let tempPdfPath = '';
 	let tempDocxPath = '';
 	try {
+		// const read = new Parser();
+		// const write = new XmlRenderer({ sourcepos: true });
 		const { content: description, ...data }: DDE & StaticDataDDE = await request.json();
 		const payload = { ...data, ...description };
+		// const brief_description = write.render(read.parse(description.brief_description))
+		// payload.brief_description = write.render(brief_description);
 
 		// Path ke template DOCX
-		const templatePath = path.resolve('tmp', 'template_document.docx');
+		const templatePath = path.resolve('tmp', 'docxtemplater.docx');
 		if (!fs.existsSync(templatePath)) {
 			return json({ error: 'template not found' }, { status: 404 });
 		}
@@ -37,73 +65,28 @@ export const POST: RequestHandler = async ({ request }) => {
 		// Baca dan proses DOCX template
 		const content = fs.readFileSync(tempDocxPath, 'binary');
 		const zip = new PizZip(content);
-		// const imageModule = new ImageModule({
-		// 	centered: true,
-		// 	getImage: async (tagValue: string) => {
-		// 		if (!tagValue) return null;
 
-		// 		// Base64 data URI
-		// 		if (tagValue.startsWith('data:image')) {
-		// 			const base64 = tagValue.split(',')[1];
-		// 			return Buffer.from(base64, 'base64');
-		// 		}
-
-		// 		// URL eksternal (http / https)
-		// 		if (tagValue.startsWith('http')) {
-		// 			const res = await fetch(tagValue);
-		// 			if (!res.ok) throw new Error(`Failed to fetch image: ${tagValue}`);
-		// 			const arrayBuffer = await res.arrayBuffer();
-		// 			return Buffer.from(arrayBuffer);
-		// 		}
-
-		// 		// Kalau bukan base64 atau URL → skip
-		// 		return null;
-		// 	},
-		// 	getSize: (imgBuffer: Buffer) => {
-		// 		try {
-		// 			const { width, height } = sizeOf(imgBuffer);
-		// 			const maxWidth = 120; // agar tabel tidak pecah
-		// 			const ratio = Math.min(maxWidth / width, 1);
-		// 			return [width * ratio, height * ratio];
-		// 		} catch {
-		// 			return [100, 60];
-		// 		}
-		// 	}
-		// });
-
-		const imageModule = new ImageModule({
-			getImage: (tagValue: string) => {
-				if (!tagValue) return null;
-
-				if (tagValue.startsWith('data:image')) {
-					const base64 = tagValue.split(',')[1];
-					return Buffer.from(base64, 'base64');
-				}
-
-				if (tagValue.startsWith('http')) {
-					fetch(tagValue)
-						.then((res) => res.arrayBuffer())
-						.then((res) => Buffer.from(res))
-						.catch(() => null);
-				}
-				return null;
-			},
+		const imageOptions: ImageModuleOptions = {
+			getImage: (tag) => base64DataURLToArrayBuffer(tag),
 			getSize: (img: Buffer) => {
 				const dimensions = sizeOf(img);
 				return [dimensions.width || 100, dimensions.height || 100];
 			},
 			centered: true
-		});
+		};
 
 		const doc = new Docxtemplater(zip, {
-			modules: [imageModule],
-			delimiters: { start: '{{', end: '}}' },
-			nullGetter: () => '-'
+			modules: [new ImageModule(imageOptions)],
+			// delimiters: { start: '{{', end: '}}' },
+			nullGetter: () => '-',
+			linebreaks: true
 		});
+
+		// console.log(brief_description);
 
 		// Isi placeholder
 		doc.render(payload);
-		// doc.render();
+		// await doc.renderAsync(payload);
 
 		// Simpan file hasil pengisian
 		const output = doc.getZip().generate({ type: 'nodebuffer' });
