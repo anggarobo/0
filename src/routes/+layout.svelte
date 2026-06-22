@@ -13,7 +13,8 @@
 			return [
 				{ label: 'Blog', path: '/blog' },
 				{ label: 'Experience', path: '/experience' },
-				{ label: 'Projects', path: '/projects' }
+				{ label: 'Projects', path: '/projects' },
+				{ label: 'Tools', path: '/tools' }
 			];
 		}
 		return [{ label: 'DDE', path: '/dev/dataon/dde' }];
