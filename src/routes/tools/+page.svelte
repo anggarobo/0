@@ -26,9 +26,7 @@
 			<dt class="font-medium">
 				<a class="c-text-hover" href="/tools/convert-case">Convert Case</a>
 			</dt>
-			<dd class="mt-2 text-sm">
-				Convert Case Tool – Transform Text Casing
-			</dd>
+			<dd class="mt-2 text-sm">Convert Case Tool – Transform Text Casing</dd>
 		</div>
 	</dl>
 </section>

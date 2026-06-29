@@ -12,7 +12,7 @@
 {#if stats}
 	<section aria-label="Live statistics">
 		<div class="flex flex-wrap gap-1 text-xs text-neutral-500 dark:text-neutral-400">
-			<span class="rounded bg-neutral-50 pr-2 py-1 dark:bg-neutral-900"
+			<span class="rounded bg-neutral-50 py-1 pr-2 dark:bg-neutral-900"
 				>{stats.characters} chars</span
 			>
 			<span class="rounded bg-neutral-50 px-2 py-1 dark:bg-neutral-900"

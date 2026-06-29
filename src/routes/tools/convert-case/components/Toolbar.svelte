@@ -47,7 +47,7 @@
 	];
 </script>
 
-<div class="space-y-4">
+<div class="space-y-4 flex gap-3">
 	<ActionGroup title="Basic" actions={basic} onAction={(k: string) => onConvert(k as CaseKey)} />
 	<ActionGroup
 		title="Programming"
