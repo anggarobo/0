@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { CaseKey, UtilityKey } from '../lib/types';
-	import ActionGroup from './ActionGroup.svelte';
-	import type { Action } from './ActionGroup.svelte';
+	import type { Action } from './Dropdown.svelte';
+	import Dropdown from './Dropdown.svelte';
 
 	export let onConvert: (key: CaseKey | UtilityKey) => void;
 
@@ -47,14 +47,14 @@
 	];
 </script>
 
-<div class="space-y-4 flex gap-3">
-	<ActionGroup title="Basic" actions={basic} onAction={(k: string) => onConvert(k as CaseKey)} />
-	<ActionGroup
+<div class="flex gap-3 space-y-4">
+	<Dropdown title="Basic" actions={basic} onAction={(k: string) => onConvert(k as CaseKey)} />
+	<Dropdown
 		title="Programming"
 		actions={programming}
 		onAction={(k: string) => onConvert(k as CaseKey)}
 	/>
-	<ActionGroup
+	<Dropdown
 		title="Utilities"
 		actions={utilities}
 		onAction={(k: string) => onConvert(k as UtilityKey)}

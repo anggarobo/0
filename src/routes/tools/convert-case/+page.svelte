@@ -93,7 +93,6 @@
 <section class="mt-6 space-y-4">
 	<!-- Actions row -->
 	<div class="flex flex-wrap items-center gap-2">
-
 		<button
 			type="button"
 			onclick={triggerUpload}
@@ -125,7 +124,7 @@
 	<!-- Toolbar -->
 	<Toolbar {onConvert} />
 
-	<TextEditor clear={clear} value={input} onInput={setInput} />
+	<TextEditor {clear} value={input} onInput={setInput} />
 
 	<label class="c-text mb-2 block text-sm font-medium" for="convert-case-output">Result</label>
 	<div class="relative">
@@ -133,21 +132,21 @@
 			type="button"
 			onclick={copyOutput}
 			aria-label="Copy converted text"
-			class="absolute right-2 top-2 rounded-lg border border-neutral-300 px-1.5 pt-1 pb-0.5 text-sm font-medium text-neutral-700 transition-colors hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-neutral-100"
+			class="absolute top-2 right-2 rounded-lg border border-neutral-300 px-1.5 pt-1 pb-0.5 text-sm font-medium text-neutral-700 transition-colors hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-neutral-100"
 			hidden={!input}
 		>
 			{copied === 'output' ? '📋' : '📋'}
 		</button>
-	<textarea
-		id="convert-case-output"
-		bind:value={output}
-		rows={6}
-		spellcheck={false}
-		autocomplete="off"
-		aria-label="Converted text output"
-		readonly
-		class="w-full resize-y rounded-lg border border-neutral-300 bg-neutral-50 px-3 py-2 font-mono text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200"
-	></textarea>
+		<textarea
+			id="convert-case-output"
+			bind:value={output}
+			rows={6}
+			spellcheck={false}
+			autocomplete="off"
+			aria-label="Converted text output"
+			readonly
+			class="w-full resize-y rounded-lg border border-neutral-300 bg-neutral-50 px-3 py-2 font-mono text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200"
+		></textarea>
 	</div>
 
 	<Statistics {stats} />
