@@ -24,3 +24,7 @@ vite.config.ts.timestamp-*
 
 service-account.json
 .kiro
+CLAUDE.md
+CONTRIBUTING.md
+
+src/**/AGENTS.md

@@ -1,38 +1,148 @@
-# sv
+# Portfolio & Internal Tooling
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Personal portfolio and internal tooling application for **Angga Prabowo**, a Software Engineer based in South Tangerang, Indonesia.
 
-## Creating a project
+The project combines a public portfolio website with an internal documentation platform used for managing Design & Development Documents (DDE), integrating with Google Workspace services.
 
-If you're seeing this, you've probably already done this step. Congrats!
+---
 
-```sh
-# create a new project in the current directory
-npx sv create
+## Tech Stack
 
-# create a new project in my-app
-npx sv create my-app
+- SvelteKit 2
+- Svelte 5 (Runes)
+- TypeScript (Strict Mode)
+- TailwindCSS v4
+- Google Docs API
+- Google Sheets API
+- Google Drive API
+- Puppeteer
+- LibreOffice
+- docxtemplater
+- Zod
+- pnpm Workspaces
+
+---
+
+## Features
+
+### Portfolio
+
+- About
+- Experience
+- Projects
+- Blog (powered by dev.to)
+
+### Internal Tooling
+
+- DDE Management
+- Google Sheets integration
+- Google Docs export
+- DOCX generation
+- PDF export
+- Ticket management
+
+---
+
+## Project Structure
+
+```text
+src/routes/
+├── +page.svelte
+├── +layout.svelte
+├── blog/
+├── experience/
+├── projects/
+├── tools/
+├── dev/
+└── api/
 ```
 
-## Developing
+---
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Environment Variables
 
-```sh
-npm run dev
+Create a `.env` file.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```env
+GOOGLE_SERVICE_ACCOUNT=
+GOOGLE_SHEET_ID=
 ```
 
-## Building
+`GOOGLE_SERVICE_ACCOUNT` should contain the complete Service Account JSON as a single string.
 
-To create a production version of your app:
+---
 
-```sh
-npm run build
+## Development
+
+Install dependencies
+
+```bash
+pnpm install
 ```
 
-You can preview the production build with `npm run preview`.
+Run development server
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```bash
+pnpm dev
+```
+
+Build
+
+```bash
+pnpm build
+```
+
+Preview
+
+```bash
+pnpm preview
+```
+
+---
+
+## Core Domain
+
+### DDE (Design & Development Document)
+
+A DDE represents a technical specification linked to a project ticket.
+
+Each document contains:
+
+- metadata
+- project information
+- revision history
+- process flow
+- UI design
+- database design
+
+Data is stored in Google Sheets and exported into Google Docs or DOCX.
+
+---
+
+## Navigation
+
+The application has two operating modes.
+
+### Portfolio Mode
+
+Shows
+
+- Blog
+- Experience
+- Projects
+
+### Company Mode
+
+Route:
+
+```
+/dev/{company}
+```
+
+Example
+
+```
+/dev/dataon
+```
+
+Navigation switches to internal tooling only.

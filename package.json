@@ -27,10 +27,12 @@
 		"@types/jsdom": "^27.0.0",
 		"@types/node": "^22",
 		"@types/turndown": "^5.0.6",
+		"@vitest/ui": "^4.1.9",
 		"eslint": "^9.38.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.12.4",
 		"globals": "^16.4.0",
+		"jsdom": "^27.1.0",
 		"path": "^0.12.7",
 		"prettier": "^3.6.2",
 		"prettier-plugin-svelte": "^3.4.0",
@@ -39,7 +41,8 @@
 		"svelte-check": "^4.3.2",
 		"typescript": "^5.9.2",
 		"typescript-eslint": "^8.46.1",
-		"vite": "^7.1.7"
+		"vite": "^7.1.7",
+		"vitest": "^4.1.9"
 	},
 	"dependencies": {
 		"@tailwindcss/typography": "^0.5.19",
@@ -56,7 +59,6 @@
 		"html-pdf": "^3.0.1",
 		"html-to-text": "^9.0.5",
 		"image-size": "^2.0.2",
-		"jsdom": "^27.1.0",
 		"libreoffice-convert": "^1.7.0",
 		"mammoth": "^1.11.0",
 		"marked": "^16.4.1",

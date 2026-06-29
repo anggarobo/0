@@ -603,7 +603,7 @@
 			<div
 				class="overflow-hidden rounded-lg border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950"
 			>
-				<div class="max-h-[32rem] overflow-auto">
+				<div class="max-h-128 overflow-auto">
 					<table class="min-w-full table-fixed text-left font-mono text-xs">
 						<thead
 							class="sticky top-0 bg-neutral-100 text-neutral-500 dark:bg-neutral-900 dark:text-neutral-400"
