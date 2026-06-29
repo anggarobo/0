@@ -47,7 +47,7 @@
 	];
 </script>
 
-<div class="flex gap-3 space-y-4">
+<div class="flex gap-3 space-y-4 flex-wrap">
 	<Dropdown title="Basic" actions={basic} onAction={(k: string) => onConvert(k as CaseKey)} />
 	<Dropdown
 		title="Programming"
